@@ -1,0 +1,21 @@
+{
+  "name": "component_model_react",
+  "version": "0.0.1",
+  "description": "React Component for wpchuck component model",
+  "main": "index.jsx",
+  "devDependencies": {
+    "@wordpress/scripts": "^23.3.0"
+  },
+  "scripts": {
+    "build": "wp-scripts build",
+    "start": "wp-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wpchunk",
+    "wpchunk-cli",
+    "react"
+  ],
+  "author": "ale@alemacedo.com",
+  "license": "ISC"
+}

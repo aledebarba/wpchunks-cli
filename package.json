@@ -1,0 +1,22 @@
+{
+  "name": "wpchunks-cli",
+  "version": "0.0.1",
+  "description": "Create a Wordpress component based on wpchunks plugin model",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "wpchunk": "bin/index.js"
+  },
+  "keywords": ["wordpress", "component", "plugin", "wpchunks"],
+  "author": "ale@alemacedo.com",
+  "license": "(ISC OR GPL-3.0)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aledebarba/wpchunks-cli"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "fs-extra": "^10.1.0",
+    "shelljs": "^0.8.5"
+  }
+}
