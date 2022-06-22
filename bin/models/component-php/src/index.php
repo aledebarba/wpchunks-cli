@@ -1,13 +1,13 @@
 <?php 
 /**
- * Component: Hello World React PHP
- * Description: Hello World PHP Component - basic scaffold for a component
- * 
- * @folder <components-directory>/component-<name>/src
- * @return any 
- * 
- */?>
-
-<div class="hello-world-php">
-    <h1>Hello World PHP</h1>
+ * Component: %componentname%
+ * Description: %componentname% - is a basic structure for a WPChunk component
+ *      use this as a starting point for your writing any extra functions or
+ *      hooks for your component.
+ */
+?>
+<div class="%componentname%">
+    <h1>Hello</h1>
+    <p><strong>%componentname%</strong> is a component created with the WPChunk framework.</p>
+    <p>This component was accessed last time at: <?php echo date('d-m-y h:i:s'); ?></p>
 </div>

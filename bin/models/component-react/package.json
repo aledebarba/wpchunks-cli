@@ -1,7 +1,7 @@
 {
-  "name": "component_model_react",
+  "name": "%componentname%",
   "version": "0.0.1",
-  "description": "React Component for wpchuck component model",
+  "description": "React Component for WpChucks component model",
   "main": "index.jsx",
   "devDependencies": {
     "@wordpress/scripts": "^23.3.0"
@@ -16,6 +16,5 @@
     "wpchunk-cli",
     "react"
   ],
-  "author": "ale@alemacedo.com",
   "license": "ISC"
 }

@@ -7,7 +7,12 @@
   "bin": {
     "wpchunk": "bin/index.js"
   },
-  "keywords": ["wordpress", "component", "plugin", "wpchunks"],
+  "keywords": [
+    "wordpress",
+    "component",
+    "plugin",
+    "wpchunks"
+  ],
   "author": "ale@alemacedo.com",
   "license": "(ISC OR GPL-3.0)",
   "repository": {

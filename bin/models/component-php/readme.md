@@ -3,22 +3,25 @@
 WPChunks provides a simple component system form *Wordpress*.
 This folder contains the **php** component system structure and files necessary to run and embed the component inside a *Wordpress* page. 
 
-    Component::P('<component-name>');
+    Component::P('%componentname%');
     or
-    Component::php('<component-name>');
+    Component::php('%componentname%');
 
 ## Folder and files
 
 The component default folder structure: 
 
-    - <Themne Folder>
-    		 + /WPChunks
-    			 + /components
-    				 + /component-name
-    					 + readme.md
-    					 + /src	
-    						 + index.php
-    						 + style.php
+    Wordpress ThemeFolder/ComponentFolder
+		└── %componentname%
+			├── readme.md (this file)
+			└── src
+				└── functions
+					└── breakpoints.php (break points variables to style.php sass code)
+				├── index.php (main plugin code)
+				└── style.php (compiles sass code and embed to page)
 
-**Observe that** the style file must be a php file. It contains SCSS compatible code, wich is compiled by SASS Php Compiler on server side and embedded to the page that use the component via *Wordpress* functions.                             
+
+####Observe that####
+The style file **must** be a php file.
+It contains **SCSS** compatible code, wich is compiled by Sass Php Compiler on server side and embeded to the page.
                              

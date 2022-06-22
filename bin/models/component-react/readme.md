@@ -1,28 +1,34 @@
 # WPChunk Component Model 
 
-WPChunks provides a simple component system form *Wordpress*.
-This folder contains the **react** component system structure and files necessary to run and embed the component inside a *Wordpress* page. From inside this folder, run the command:
+WPChunks provides a simple component system form ***Wordpress***.
+This folder contains the **react** component system structure and files necessary to run and embed the component inside a ***Wordpress*** page. 
+
+To start the watch/refresh build of the component, use the command from the component folder:
 
     npm run start
 
-This command will start the building / watching process and, if not interrupted, every time you make changes to this folder files, the build process will output the compiled code to the build folder. 
+To build the productions version of the component, use the command from the component folder:
+
+    npm run build
+
 To include the component inside a php page, use the command:
 
-    Component::react('<component-name>');
+    Component::react('%componentname%');
     or
-    Component::D('<component-name>');
+    Component::D('%componentname%');
 
 ## Folder and files
 
 The component default folder structure: 
 
-    - <Themne Folder>
-    		 + /WPChunks
-    			 + /components
-    				 + /component-name
-    					 + readme.md
-    					 + package,json
-    					 + ,gitignore
-    					 + /src	
-    						 + index.jsx
-    						 + index.scss
+	Wordpress ThemeFolder/ComponentFolder
+		└── %componentname%
+			├── readme.md (this file)
+			├── src
+			│	├── mixins
+			│	│	└── mixins.scss 
+			│	├── index.jsx (source component code)
+			│	└── index.scss 
+			└── build
+				├── index.js  (entry point for built component)
+				└── index.css (compiled resulto of scss file)

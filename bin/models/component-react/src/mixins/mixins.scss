@@ -1,0 +1,55 @@
+$xxsmall:   320px;
+$xsmall:    480px;
+$small:     576px;
+$medium:    768px;
+$large:     992px;
+$xlarge:    1200px;
+$xxlarge:   1600px;
+$fullhd:    1920px;
+$quadhd:    2560px;
+
+@mixin xxsmall {
+  @media screen and (min-width: #{$xxsmall}) {
+    @content;
+  }
+}
+@mixin xsmall {
+  @media screen and (min-width: #{$xsmall}) {
+    @content;
+  }
+}
+@mixin small {
+  @media screen and (min-width: #{$small}) {
+    @content;
+  }
+}
+@mixin medium {
+  @media screen and (min-width: #{$medium}) {
+    @content;
+  }
+}
+@mixin large {
+  @media screen and (min-width: #{$large}) {
+    @content;
+  }
+}
+@mixin xlarge {
+  @media screen and (min-width: #{$xlarge}) {
+    @content;
+  }
+}
+@mixin xxlarge {
+  @media screen and (min-width: #{$xxlarge}) {
+    @content;
+  }
+}
+@mixin fullhd {
+  @media screen and (min-width: #{$fullhd}) {
+    @content;
+  }
+}
+@mixin quadhd {
+  @media screen and (min-width: #{$quadhd}) {
+    @content;
+  }
+}
