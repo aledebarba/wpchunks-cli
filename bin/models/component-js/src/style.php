@@ -1,7 +1,7 @@
 <?php 
     require_once __DIR__.'/functions/breakpoints.php';
 
-    sass(<<<HTML
+    sass(<<<CSS
     // start of scss code
     
     .%componentname% {
@@ -11,6 +11,7 @@
         place-items: center;
         padding: 16px;
         font-size: 1.5rem;
+        border: 3px solid tomato;
         
         $medium {
             font-size: 2rem;
@@ -29,5 +30,5 @@
     }
     
     // end of scss code
-    HTML, "%componentname%-css-control");
+    CSS, "%componentname%-css-control");
 ?>

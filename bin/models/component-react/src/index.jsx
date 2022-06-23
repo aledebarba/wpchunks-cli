@@ -2,11 +2,11 @@ import "./index.scss";
 
 const { render, useState } = wp.element; // react functions came from wp.element library
 
-const componentSelector = document.querySelector('[chunk-%componentname%]');
+const componentSelector = document.querySelector('[wpchunk-%componentname%]');
 
 const %componentreactname% = () => { 
     
-    const [ theme, setThemeDark ] = useState("default");
+    const [ theme, setTheme ] = useState("default");
     
     return ( 
     <>

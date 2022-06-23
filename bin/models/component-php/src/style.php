@@ -1,15 +1,16 @@
 <?php 
     require_once __DIR__ . '/functions/breakpoints.php';
 
-    sass(<<<HTML
+    sass(<<<CSS
     // start of scss code
     
     .%componentname% {
-        background-color: #f5f5f5;
+        background-color: navajowhite;
         color: #333;
         display: grid;
         place-items: center;
         padding: 16px;
+        margin: 16px;
         font-size: 1.5rem;
         
         $medium {
@@ -29,5 +30,5 @@
     }
     
     // end of scss code
-    HTML, "%componentname%-css-control");
+    CSS, "%componentname%-css-control");
 ?>

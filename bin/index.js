@@ -85,10 +85,12 @@ function copyModule(modelType, dest) {
         }
         if (modelType == "component-js") {
             // replace string %componentname% with the chunkname 
+            let chunkFnName = chunkname.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
             searchReplace(`${destDir}src/index.js`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.js`, /%componentfnname%/g, chunkFnName);
             byeMessage(chunkname, "JavaScript");
         } 
         if (modelType == "component-react") {
