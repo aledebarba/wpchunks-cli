@@ -81,7 +81,7 @@ function copyModule(modelType, dest) {
             searchReplace(`${destDir}src/index.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
-            byeMessage();
+            byeMessage(chunkname, "PHP");
         }
         if (modelType == "component-js") {
             // replace string %componentname% with the chunkname 
@@ -89,7 +89,7 @@ function copyModule(modelType, dest) {
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
-            byeMessage();
+            byeMessage(chunkname, "JavaScript");
         } 
         if (modelType == "component-react") {
             // replace string %componentname% with the chunkname 
@@ -126,7 +126,7 @@ function copyModule(modelType, dest) {
             }
             hr();
             reactNote();
-            byeMessage();
+            byeMessage(chunkname, "ReactJS");
         }
     })
     
@@ -204,16 +204,19 @@ function hr() {
 /**
  * Display the ending message
  */
-function byeMessage() {
+function byeMessage( chunkname, chunkType ) {
     let hrend = process.hrtime(hrstart);
     
     let minutes = Math.floor(hrend[0] / 60);
     let seconds = hrend[0] - minutes * 60;
     let ms = hrend[1] / 1000000;
 
-    log(chalk.greenBright(`🦄 WPChunk is done in ${minutes}m:${seconds}s:${ms}ms
-    ${chalk.whiteBright(`You can now use your component in your theme.`)}
-    ${chalk.magentaBright(`Happy coding! 🦄`)}
+    log(chalk.white(` ✅ ${chunkType} component ${chalk.bold(chunkname)} created in ${minutes}m:${seconds}s:${ms}ms`));
+    br();
+    log(chalk.greenBright(`🦄  WPChunk is done!  🦄 
+    ${chalk.whiteBright(`You can now insert the component in your theme.`)}
+    ${chalk.blue(`For more info: https://github.com/aledebarba/wpchunks-plugin`)}
+    ${chalk.magentaBright(`Happy coding! `)}
     `)
     );
 }

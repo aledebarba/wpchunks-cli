@@ -1,19 +1,18 @@
 /**
- * %componentname% is a basic javascript component 
- * created with WPChunk cli tool that works with the
- * WPChunks framework for Wordpress
+ * %componentname% is a wpchunk javascript component model.
  * 
  */
-
-document.addEventListener("DOMContentLoaded", () => {
-    let el = document.querySelector("[%componentname%]");
-    if (el) { 
-        el.innetHTML= /*html*/`
+function %componentname%__main() {
+    let chunkElement = document.querySelector("[chunk-%componentname%]");
+    if (chunkElement) { 
+        chunkElement.innerHTML= /*html*/`
             <h1>%componentname% was created and loaded</h1>
             <p>This element is the entry point for this code.</p>
-            <p>Code yours!</p>
+            <p>🦄 Code yours! 🦄</p>
         `;
     } else {
-        alert("Component %componentname% created and loaded!");
+        alert("🦄 Component %componentname% created and loaded! 🦄");
     }    
-})
+}
+
+document.addEventListener("DOMContentLoaded", () => { %componentname%__main() });
