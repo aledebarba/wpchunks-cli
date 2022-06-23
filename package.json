@@ -1,5 +1,5 @@
 {
-  "name": "@aledebarba/wpchunks-cli",
+  "name": "wpchunks-cli",
   "version": "0.0.1",
   "description": "CLI to create a Wordpress component based on wpchunks framework plugin model.",
   "author": "Alexandre CMC Souza",
