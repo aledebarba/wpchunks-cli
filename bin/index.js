@@ -9,11 +9,13 @@ import { fileURLToPath } from 'url';
 import * as child from 'child_process';
 import * as fse from 'fs-extra';
 import * as fs from 'fs';
-
+import { createRequire } from 'module';
 
 //informational constants
-const version = process.env.npm_package_version ?? '0.0.1';
-const gitUrl = '';
+const require = createRequire(import.meta.url);
+const pjson = require('../package.json');
+
+const version = pjson.version ? pjson.version : "0.0.1";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -79,7 +81,9 @@ function copyModule(modelType, dest) {
         if (modelType == "component-php") {
             // replace string %componentname% with the chunkname 
             searchReplace(`${destDir}src/index.php`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.php`, /%cliversion%/g, version);
+            searchReplace(`${destDir}src/style.scss`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             byeMessage(chunkname, "PHP");
         }
