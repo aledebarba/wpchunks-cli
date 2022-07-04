@@ -9,6 +9,7 @@
   "scripts": {
     "build": "wp-scripts build",
     "start": "wp-scripts start",
+    "bs": "browser-sync start --files './src' --proxy ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

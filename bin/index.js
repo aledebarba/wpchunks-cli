@@ -98,13 +98,15 @@ function copyModule(modelType, dest) {
             // replace string %componentreactname% with the chunkJsxName 
             let chunkJsxName = "-"+chunkname.toLowerCase()
             chunkJsxName = chunkJsxName.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-            chunkParamsName = "wpchunk_" + chunkname.replace("-","_");
+            chunkJsxName = chunkJsxName.replace("-", "_");
+            let chunkParamsName = "wpchunk_" + chunkname.replace("-","_");
+            // Perform search and replace
             searchReplace(`${destDir}src/index.jsx`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}package.json`, /%paramsname%/g, chunkParamsName);
             searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, chunkJsxName);
+            searchReplace(`${destDir}src/index.jsx`, /%paramsname%/g, chunkParamsName); 
             // install dependencies
             log(chalk.magentaBright(` Installing React component ${chunkname}
             > chdir ${destDir}

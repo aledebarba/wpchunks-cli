@@ -1,5 +1,4 @@
-
-# wpchunks-cli
+# <img src="https://user-images.githubusercontent.com/28566959/177155727-b1fe427a-52a0-4cd4-a4a0-916de66a332c.png" style="width: 64px; position: relative; top: 0.40em;"> wpchunks-cli
 
 A command line to create wpchunks wordpress plugin component.
 
