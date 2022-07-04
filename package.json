@@ -1,6 +1,6 @@
 {
   "name": "wpchunks-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "CLI to create a Wordpress component based on wpchunks framework plugin model.",
   "author": "Alexandre CMC Souza",
   "license": "MIT",
