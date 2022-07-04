@@ -26,7 +26,7 @@ let chunkdir = process.argv[4] || './'; // defaults to current directory if not 
 chunkdir = chunkdir == "./" ? "./" : chunkdir+"/";
 chalk.level = 1;
 
-welcomeMessage();
+welcomeMessage( version );
 
 // user asked for help
 if(chunkname == "-help" || chunkname == "--help" || chunkname == "-h" ) {
@@ -145,7 +145,7 @@ function copyModule(modelType, dest) {
 /**
  * Show welcome message after starting tasks passes
  */
-function welcomeMessage() {
+function welcomeMessage( version ) {
     br();
     log(chalk.yellowBright(` 🦄 Welcome to WPChunk vs: ${version} 🦄
     This cli tool creates the folders and files
