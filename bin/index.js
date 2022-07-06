@@ -82,41 +82,49 @@ function copyModule(modelType, dest) {
             // replace string %componentname% with the chunkname 
             searchReplace(`${destDir}src/index.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.php`, /%cliversion%/g, version);
-            searchReplace(`${destDir}src/style.scss`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             byeMessage(chunkname, "PHP");
         }
+
         if (modelType == "component-js") {
             // replace string %componentname% with the chunkname 
             let chunkFnName = chunkname.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
             searchReplace(`${destDir}src/index.js`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.js`, /%componentfnname%/g, chunkFnName);
             byeMessage(chunkname, "JavaScript");
         } 
+
         if (modelType == "component-react") {
-            // replace string %componentname% with the chunkname 
-            // replace string %componentreactname% with the chunkJsxName 
-            let chunkJsxName = "-"+chunkname.toLowerCase()
+            
+            let chunkJsxName = "-"+chunkname.toLowerCase();
             chunkJsxName = chunkJsxName.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+            chunkJsxName = chunkJsxName.replace(/-([0-9])/g, function (g) { return "_"+g[1]; });
             chunkJsxName = chunkJsxName.replace("-", "_");
-            let chunkParamsName = "wpchunk_" + chunkname.replace("-","_");
+            
+            let chunkParamsName = "wpchunk_" + chunkname.toLowerCase();
+            chunkParamsName = chunkParamsName.replace(/-([0-9])/g, function (g) { return "_"+g[1]; });
+
             // Perform search and replace
-            searchReplace(`${destDir}src/index.jsx`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, chunkJsxName);
+            searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.jsx`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.jsx`, /%paramsname%/g, chunkParamsName); 
+            searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, chunkJsxName);
             // install dependencies
             log(chalk.magentaBright(` Installing React component ${chunkname}
             > chdir ${destDir}
             > npm install
             `));
-            shell.cd(`${dest}${chunkname}/`);
+
+            shell.cd(`${destDir}`);
+
             // try npm install 
             try {
                 child.execSync('npm install --save-dev',{stdio:[0,1,2]});
@@ -124,6 +132,7 @@ function copyModule(modelType, dest) {
                 error(e);
                 process.exit(1);
             }
+
             // npm run build
             log(chalk.magentaBright(` 
                 > npm run build

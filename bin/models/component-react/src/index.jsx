@@ -11,10 +11,11 @@ const %componentreactname% = () => {
     return (<>
     <div className ={"%componentname%"}>
         <div class='content'>
-            <div class='title'>
-                <img src="https://user-images.githubusercontent.com/28566959/177155727-b1fe427a-52a0-4cd4-a4a0-916de66a332c.png"/>
-                <h1>Component loaded</h1>
-            </div>
+            <span class="label">
+                <img src="https://user-images.githubusercontent.com/28566959/177341564-50baf21f-5b21-449e-875a-990d41f97840.png"/>
+                <img src="https://user-images.githubusercontent.com/28566959/177224209-55c1bb68-c9f1-48c8-ba07-1635894c7202.png"/>
+            </span>
+            <span class="data">WPChunk Component Loaded</span>
             <span class="label">Project Name:</span>
             <span class="data">%componentname%</span>
             <span class="label">Component Function Name:</span>
