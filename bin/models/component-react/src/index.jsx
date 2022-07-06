@@ -1,7 +1,4 @@
 import "./index.scss";  // Import the stylesheet
-
-const params = getParams(); // get the params from Component::react() function;
-const { render, useState } = wp.element; // react functions are inside wp.element 
  
 const %componentreactname% = () => { 
     
@@ -38,5 +35,8 @@ function getParams(){
     if ( %paramsname%.params.length > 0 ) { %paramsname%.params.forEach( param => { res = {...res, ...param }  }) }
     return res; 
 }
+
+const params = getParams(); // get the params from Component::react() function;
+const { render, useState } = wp.element; // react functions are inside wp.element 
 const componentSelector = document.querySelector('[wpchunk-%componentname%]');
 render(<%componentreactname% />, componentSelector);

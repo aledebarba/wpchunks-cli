@@ -1,2 +1,0 @@
-This folder is here as a clue of project content.
-It is safe to delete this folder.

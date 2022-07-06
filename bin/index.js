@@ -108,26 +108,27 @@ function copyModule(modelType, dest) {
             chunkJsxName = chunkJsxName.replace("-", "_");
             
             let chunkParamsName = "wpchunk_" + chunkname.toLowerCase();
+            chunkParamsName = chunkParamsName.replace(/-([a-z])/g, function (g) { return "_"+g[1]; });
             chunkParamsName = chunkParamsName.replace(/-([0-9])/g, function (g) { return "_"+g[1]; });
 
             // Perform search and replace
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.jsx`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.jsx`, /%paramsname%/g, chunkParamsName); 
             searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.jsx`, /%paramsname%/g, chunkParamsName); 
+            searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, chunkJsxName);
             // install dependencies
             log(chalk.magentaBright(` Installing React component ${chunkname}
             > chdir ${destDir}
-            > npm install
+            > npm install --include=dev
             `));
 
             shell.cd(`${destDir}`);
 
             // try npm install 
             try {
-                child.execSync('npm install --save-dev',{stdio:[0,1,2]});
+                child.execSync('npm install --include=dev',{stdio:[0,1,2]});
             } catch(e) {
                 error(e);
                 process.exit(1);
