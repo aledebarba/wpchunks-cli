@@ -1,16 +1,14 @@
 <?php 
 /**
- * Component:  %componentname%
- * Description:  %componentname% - is a basic structure for a WPChunk component
- *      use this as a starting point for your writing any extra functions or
- *      hooks for your component.
+ * Component: %componentname%
+ * @example Import the component with: Import::component('functionName')->from('%componentname%');
+ * @example Run the component with...: functionName( "Ava Gardner", "Senior Developer", "@avagardner" );
  * 
- * Parameters: You can pass parameters to this component via Component::php(  '%componentname%', <parameter-value>, <parameter-value>, ... );
- *
- * Replace variables names and uncomment next line to get component parameres
- * [$productName, $description, $price, $sale] = $params;
+ * Inside the component, retrieve the arguments with:
+ * @example $list($name, $position, $twitter) = $params;
  */
 ?>
+
 <div class="%componentname%" wpchunk-%componentname%="true">
     <div class='content'>
         <span class="label">

@@ -3,10 +3,10 @@
  * 
  */
 
-const %componentfnname% = ( ajaxUrl, ajaxNonce ) => { 
+const %componentfnname% = ( props, el ) => { 
    
-    render /*html*/`
-        <div className ="%componentname%">
+    el.innerHTML = /*html*/`
+        <div class ="%componentname%">
             <div class='content'>
                 <span class="label">
                     <img src="https://user-images.githubusercontent.com/28566959/177341564-50baf21f-5b21-449e-875a-990d41f97840.png"/>
@@ -28,8 +28,17 @@ const %componentfnname% = ( ajaxUrl, ajaxNonce ) => {
     `
 } 
 
-const render = content => { document.querySelector("[%componentselector%]").innetHTML = content; };
-document.addEventListener("DOMContentLoaded", () => { 
-    // getParams();    
-    %componentfnname%();
-});
+/*
+ * get parametes from wordpress/php page 
+ * and parse into correct js instance call 
+*/
+(function(){
+    document.querySelectorAll('[wpchunk-%componentname%]')
+      .forEach(function(el) {
+        let name     = el.dataset.wpchunk.replace("-", "_");
+        let instance = parseInt(el.dataset.instance);
+        let params   = window[name][instance];
+        %componentfnname%( params.params, el );
+      }
+    )
+  })();

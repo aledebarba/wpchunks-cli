@@ -10,6 +10,7 @@ import * as child from 'child_process';
 import * as fse from 'fs-extra';
 import * as fs from 'fs';
 import { createRequire } from 'module';
+import camelCase from 'camelcase';
 
 //informational constants
 const require = createRequire(import.meta.url);
@@ -20,9 +21,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // process arguments
-let chunkname = process.argv[2];
-let chunktype = process.argv[3] || 'php'; // defaults to php model if not specifield
-let chunkdir = process.argv[4] || './'; // defaults to current directory if not specifield
+let chunkname  = process.argv[2];
+let chunktype  = process.argv[3] || 'php'; // defaults to php model if not specifield
+let chunkdir   = process.argv[4] || './'; // defaults to current directory if not specifield
+
 chunkdir = chunkdir == "./" ? "./" : chunkdir+"/";
 chalk.level = 1;
 
@@ -68,10 +70,13 @@ function copyModule(modelType, dest) {
 
     const srcDir = `${__dirname}/models/${modelType}/`;
     const destDir = `${dest}${chunkname}/`;
+    const fnCamelCase  = camelCase(chunkname);
+    const fnPascalCase = camelCase(chunkname, { pascalCase: true });
+    const jsVarsName   = fnCamelCase+"GlobalContextParams";
     
     // if destDir exists, throw error and exit
     if(fs.existsSync(destDir)) {
-        error(`Component ${chunkname} already exists`);
+        error(`Component ${chunkname} cannot be created because destination folder already exist.`);
         process.exit(1);
     }
 
@@ -90,38 +95,54 @@ function copyModule(modelType, dest) {
 
         if (modelType == "component-js") {
             // replace string %componentname% with the chunkname 
-            let chunkFnName = chunkname.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+            let chunkFnName = 
             searchReplace(`${destDir}src/index.js`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.js`, /%componentfnname%/g, chunkFnName);
+            searchReplace(`${destDir}src/index.js`, /%componentfnname%/g, fnCamelCase);
+            log(chalk.magentaBright(` Installing ${chunkname} dependencies...
+            \>\$ chdir ${destDir}
+            \>\$ npm install --include=dev
+            `));
+            shell.cd(`${destDir}`);
+
+            // try npm install 
+            try {
+                child.execSync('npm install --include=dev',{stdio:[0,1,2]});
+            } catch(e) {
+                error(e);
+                process.exit(1);
+            }
+
+            // npm run build
+            log(chalk.magentaBright(` 
+                > npm run build
+            `));
+            try {
+                child.execSync('npm run build',{stdio:[0,1,2]});
+            } catch(e) {
+                error(e);
+                process.exit(1);
+            }
+            hr();
+            jsBundleNote();
             byeMessage(chunkname, "JavaScript");
         } 
 
         if (modelType == "component-react") {
             
-            let chunkJsxName = "-"+chunkname.toLowerCase();
-            chunkJsxName = chunkJsxName.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-            chunkJsxName = chunkJsxName.replace(/-([0-9])/g, function (g) { return "_"+g[1]; });
-            chunkJsxName = chunkJsxName.replace("-", "_");
-            
-            let chunkParamsName = "wpchunk_" + chunkname.toLowerCase();
-            chunkParamsName = chunkParamsName.replace(/-([a-z])/g, function (g) { return "_"+g[1]; });
-            chunkParamsName = chunkParamsName.replace(/-([0-9])/g, function (g) { return "_"+g[1]; });
-
             // Perform search and replace
             searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.jsx`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.jsx`, /%paramsname%/g, chunkParamsName); 
             searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
-            searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, chunkJsxName);
+            searchReplace(`${destDir}src/index.jsx`, /%componentreactname%/g, fnPascalCase);
             // install dependencies
             log(chalk.magentaBright(` Installing React component ${chunkname}
-            > chdir ${destDir}
-            > npm install --include=dev
+            \>\$ chdir ${destDir}
+            \>\$ npm install --include=dev
             `));
 
             shell.cd(`${destDir}`);
@@ -192,6 +213,23 @@ function help() {
 function reactNote() {
     br();
     log(chalk.white(`Note: react components are installed with npm install --save-dev
+    and then builded (with npm run build) for the first time inside 
+    the component ${chalk.bold('build')} folder.
+    This way the built code can be embeded inside a wordpress page.
+    For continuous development (watch / refresh on save),
+    you can ${chalk.bold('npm run start')} from the component folder.
+
+    More information about wordpress/react system: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-element/
+    More information about @wordpress/scripts: https://www.npmjs.com/package/@wordpress/scripts 
+
+    `));
+}
+/**
+ * Display a note about wordpress/react system and scripts when the cli creates a react component
+ */
+function jsBundleNote() {
+    br();
+    log(chalk.white(`Note: javascript bundled components are installed with npm install --save-dev
     and then builded (with npm run build) for the first time inside 
     the component ${chalk.bold('build')} folder.
     This way the built code can be embeded inside a wordpress page.
