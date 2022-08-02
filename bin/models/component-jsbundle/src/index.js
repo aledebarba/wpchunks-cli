@@ -2,7 +2,9 @@
  * %componentname% is a wpchunk javascript component model.
  * 
  */
-const %componentfnname% = ( { params, ajaxUrl, ajaxNonce }, el ) => { 
+import "./index.scss";
+
+const %componentfnname% = ( { params, ajaxNonce, ajaxUrl}, el ) => { 
 
     el.innerHTML = /*html*/`
         <div class ="%componentname%">
@@ -18,6 +20,8 @@ const %componentfnname% = ( { params, ajaxUrl, ajaxNonce }, el ) => {
                 <span class="data">${ajaxUrl}</span>
                 <span class="label">Ajax nonce</span>
                 <span class="data">${ajaxNonce}</span>
+                <span class="label">Build:</span>
+                <span class="data">npm run build</span>
             </div>
         </div>
     `;

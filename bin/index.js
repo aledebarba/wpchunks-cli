@@ -43,7 +43,7 @@ if(!chunkname) {
 }
 // transform the chuck type and validate it
 chunktype = chunktype.toLowerCase();
-if(!['php', 'js', 'javascript', 'react'].includes(chunktype)) {
+if(!['php', 'js', 'javascript', 'react', 'jsapp', 'jsbundle'].includes(chunktype)) {
     // invalid chunk type
     error(`Component type is not supported
     use: npx wpchunk --help for more info`);
@@ -51,7 +51,13 @@ if(!['php', 'js', 'javascript', 'react'].includes(chunktype)) {
 };
 
 // select model
-let models = {php:"component-php", js:"component-js", javascript:"component-js", react:"component-react"};
+let models = {
+    php:"component-php", 
+    js:"component-js", 
+    javascript:"component-js", 
+    react:"component-react",
+    jsbundle: "component-jsbundle"
+};
 chunktype = models[chunktype];
 
 copyModule(chunktype, chunkdir);
@@ -72,7 +78,6 @@ function copyModule(modelType, dest) {
     const destDir = `${dest}${chunkname}/`;
     const fnCamelCase  = camelCase(chunkname);
     const fnPascalCase = camelCase(chunkname, { pascalCase: true });
-    const jsVarsName   = fnCamelCase+"GlobalContextParams";
     
     // if destDir exists, throw error and exit
     if(fs.existsSync(destDir)) {
@@ -94,8 +99,16 @@ function copyModule(modelType, dest) {
         }
 
         if (modelType == "component-js") {
-            // replace string %componentname% with the chunkname 
-            let chunkFnName = 
+            searchReplace(`${destDir}src/index.js`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}readme.md`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}package.json`, /%componentname%/g, chunkname);
+            searchReplace(`${destDir}src/index.js`, /%componentfnname%/g, fnCamelCase);
+            byeMessage(chunkname, "JavaScript");
+        }
+
+        if (modelType == "component-jsbundle") {
             searchReplace(`${destDir}src/index.js`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/index.scss`, /%componentname%/g, chunkname);
             searchReplace(`${destDir}src/style.php`, /%componentname%/g, chunkname);
