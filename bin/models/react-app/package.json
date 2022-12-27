@@ -2,7 +2,7 @@
   "name": "%componentname%",
   "version": "0.0.1",
   "description": "React Component for WpChucks component model",
-  "main": "index.jsx",
+  "main": "_app.js",
   "devDependencies": {
     "@wordpress/scripts": "latest"
   },
@@ -27,5 +27,5 @@
     "react"
   ],
   "license": "MIT",
-  "wpchunk": "react"
+  "wpchunk": "react_app"
 }

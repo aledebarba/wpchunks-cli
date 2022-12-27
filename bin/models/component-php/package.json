@@ -11,6 +11,6 @@
     "browser-sync": "latest"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "wpchunk": "php"
 }

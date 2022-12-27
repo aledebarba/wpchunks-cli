@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+//
+.%componentname% {
+  
+  background-color: cornsilk;
+  font-family: "IBM Plex Mono", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+  
+  .content { 
+      margin: 16px auto;
+      padding: 16px 0 24px;
+      display: grid;
+      width: 50%;
+      width: 50vw;
+      min-width: 480px;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+
+      img { 
+        width: 72px; 
+        margin-right: 8px;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        &:hover {
+          transform: scale(1.5);
+          transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+      }
+
+      .label {  font-size: 1em; color: gray; text-align: right; }
+      .data { font-size: 1em; font-weight: bolder; color: black;  }
+  }
+}

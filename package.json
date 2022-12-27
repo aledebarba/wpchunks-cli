@@ -1,9 +1,9 @@
 {
   "name": "wpchunks-cli",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CLI to create a Wordpress component based on wpchunks framework components/plugin model.",
   "author": "Alexandre CMC Souza",
-  "license": "MIT",
+  "licence": "MIT",
   "homepage": "https://github.com/aledebarba/wpchunks-cli",
   "bugs": {
     "url": "https://github.com/aledebarba/wpchunks-cli/issues"

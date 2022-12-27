@@ -18,6 +18,6 @@
   "scripts": {
     "bs": "browser-sync start --files './src' --proxy "
   },
-  "license": "ISC",
+  "license": "MIT",
   "wpchunk": "javascript"
 }
