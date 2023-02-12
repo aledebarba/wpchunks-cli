@@ -43,7 +43,7 @@ if(!chunkname) {
 }
 // transform the chuck type and validate it
 chunktype = chunktype.toLowerCase();
-if(!['php', 'js', 'javascript', 'react', 'jsapp', 'jsbundle'].includes(chunktype)) {
+if(!['php', 'js', 'javascript', 'react', 'jsapp', 'jsbundle','themefrontend'].includes(chunktype)) {
     // invalid chunk type
     error(`Component type is not supported
     use: npx wpchunk --help for more info`);

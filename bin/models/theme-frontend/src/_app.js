@@ -16,10 +16,10 @@ import {default as ArchivePage} from "./pages/archive"
 import {default as PostPage} from "./pages/post"
 import {default as NotFoundPage} from "./pages/404"
 // import loading fallback component 
-import {default as Loading} from "./components/loading"
+import { Loading } from "./components/loading"
 
 // create mains app
-const Main_ = () => { 
+const Main = () => { 
     // create routes from wordpress pages as lazy loaded modules
     const pages = _app.pages();
     let pagesModules = [];
@@ -38,6 +38,8 @@ const Main_ = () => {
         }
       );
     });  
+
+    console.log( _app.primaryMenu() );
     
     return (
         <React.StrictMode>
@@ -65,7 +67,7 @@ const Main_ = () => {
 };
 
 // get the div element where the app will be rendered
-const root = document.querySelector('[wpchunk-%componentname%]');
+const root = document.querySelector('[wpchunk-theme-frontend]');
 
 // render the app
-root && render( <MainApp />, root);
+root && render( <Main />, root);

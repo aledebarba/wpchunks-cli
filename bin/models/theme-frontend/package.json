@@ -1,7 +1,7 @@
 {
-  "name": "%componentname%",
+  "name": "theme_frontend",
   "version": "0.0.1",
-  "description": "React App from wpchunk theme frontend",
+  "description": "Hysteria Custom Theme Frontend Code - ReactJS",
   "main": "_app.js",
   "dependencies": {
     "@wordpress/scripts": "^25.1.0",
@@ -10,10 +10,11 @@
     "react-router-dom": "^6.4.5"
   },
   "devDependencies": {
-    "@iconify/react": "^4.0.1"
+    "@iconify/react": "^4.0.1",
+    "typescript": "^4.5.2"
   },
   "scripts": {
-    "build": "wp-scripts build src/_app.js",
+    "build": "wp-scripts build ./src/_app.js",
     "check-engines": "wp-scripts check-engines",
     "check-licenses": "wp-scripts check-licenses",
     "format": "wp-scripts format",
@@ -23,7 +24,7 @@
     "lint:pkg-json": "wp-scripts lint-pkg-json",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start src/_app.js",
+    "start": "wp-scripts start ./src/_app.js",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
